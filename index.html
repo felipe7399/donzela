@@ -3,71 +3,377 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Título do Seu Site</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link para um arquivo CSS externo -->
+    <title>Donzela Doces</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
             margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-        }
-        nav {
-            margin: 10px 0;
-        }
-        nav a {
-            margin: 0 15px;
-            text-decoration: none;
-            color: #4CAF50;
-        }
-        section {
             padding: 20px;
         }
-        footer {
-            background-color: #333;
-            color: white;
+        h1 {
             text-align: center;
-            padding: 10px 0;
-            position: relative;
-            bottom: 0;
+            color: #e91e63;
+            margin-bottom: 20px;
+        }
+        h2 {
+            margin-top: 20px;
+            color: #555;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .item {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .item label {
+            flex: 1;
+        }
+        .quantity {
+            margin-left: 10px;
+            display: none; /* Escondido por padrão */
+        }
+        button {
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #c2185b;
+        }
+        .images {
+            margin-top: 20px;
+        }
+        .images img {
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0; /* Espaçamento entre as imagens */
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilos do Modal */
+        .modal {
+            display: none; /* Oculto por padrão */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
             width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Estilo do campo de nome */
+        .nome-input {
+            margin: 20px 0;
+        }
+        .nome-input label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .nome-input input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
+<div class="container">
+    <h1>Donzela Doces</h1>
 
-<header>
-    <h1>Bem-vindo ao Seu Site!</h1>
-    <nav>
-        <a href="#home">Início</a>
-        <a href="#sobre">Sobre</a>
-        <a href="#contato">Contato</a>
-    </nav>
-</header>
+    <!-- Adicionando as imagens -->
+    <div class="images">
+        <img src="images/image1.jpeg" alt="Imagem 1">
+        <img src="images/image2.jpeg" alt="Imagem 2">
+        <img src="images/image3.jpeg" alt="Imagem 3">
+    </div>
 
-<section id="home">
-    <h2>Página Inicial</h2>
-    <p>Esta é uma seção introdutória do seu site. Você pode adicionar informações relevantes aqui.</p>
-</section>
+    <h2>Tamanhos</h2>
+    <div class="item">
+        <label>
+            <input type="checkbox" name="tamanho" value="4 unidades - R$ 12" onclick="toggleQuantity(this)">
+            Caixa com 4 unidades (R$ 12)
+        </label>
+        <select class="quantity" onchange="updateMessage()">
+            <option value="0">Quantidade</option>
+            <script>
+                for (let i = 1; i <= 10; i++) {
+                    document.write(`<option value="${i}">${i}</option>`);
+                }
+            </script>
+        </select>
+    </div>
+    <div class="item">
+        <label>
+            <input type="checkbox" name="tamanho" value="6 unidades - R$ 18" onclick="toggleQuantity(this)">
+            Caixa com 6 unidades (R$ 18)
+        </label>
+        <select class="quantity" onchange="updateMessage()">
+            <option value="0">Quantidade</option>
+            <script>
+                for (let i = 1; i <= 10; i++) {
+                    document.write(`<option value="${i}">${i}</option>`);
+                }
+            </script>
+        </select>
+    </div>
+    <div class="item">
+        <label>
+            <input type="checkbox" name="tamanho" value="8 unidades - R$ 20" onclick="toggleQuantity(this)">
+            Caixa com 8 unidades (R$ 20)
+        </label>
+        <select class="quantity" onchange="updateMessage()">
+            <option value="0">Quantidade</option>
+            <script>
+                for (let i = 1; i <= 10; i++) {
+                    document.write(`<option value="${i}">${i}</option>`);
+                }
+            </script>
+        </select>
+    </div>
 
-<section id="sobre">
-    <h2>Sobre Nós</h2>
-    <p>Conte-nos mais sobre você ou sua empresa. Esta seção pode conter a missão, visão e valores.</p>
-</section>
+    <h2>Sabores Sem Recheio</h2>
+    <div class="item">
+        <label>
+            <input type="checkbox" name="saborSemRecheio" value="Tradicional" onclick="toggleQuantity(this)">
+            Tradicional
+        </label>
+        <select class="quantity" onchange="updateMessage()">
+            <option value="0">Quantidade</option>
+            <script>
+                for (let i = 1; i <= 10; i++) {
+                    document.write(`<option value="${i}">${i}</option>`);
+                }
+            </script>
+        </select>
+    </div>
+    <div class="item">
+        <label>
+            <input type="checkbox" name="saborSemRecheio" value="Moranguinho" onclick="toggleQuantity(this)">
+            Moranguinho
+        </label>
+        <select class="quantity" onchange="updateMessage()">
+            <option value="0">Quantidade</option>
+            <script>
+                for (let i = 1; i <= 10; i++) {
+                    document.write(`<option value="${i}">${i}</option>`);
+                }
+            </script>
+        </select>
+    </div>
+    <div class="item">
+        <label>
+            <input type="checkbox" name="saborSemRecheio" value="Galak" onclick="toggleQuantity(this)">
+            Galak
+        </label>
+        <select class="quantity" onchange="updateMessage()">
+            <option value="0">Quantidade</option>
+            <script>
+                for (let i = 1; i <= 10; i++) {
+                    document.write(`<option value="${i}">${i}</option>`);
+                }
+            </script>
+        </select>
+    </div>
+    <div class="item">
+        <label>
+            <input type="checkbox" name="saborSemRecheio" value="Paçoca" onclick="toggleQuantity(this)">
+            Paçoca
+        </label>
+        <select class="quantity" onchange="updateMessage()">
+            <option value="0">Quantidade</option>
+            <script>
+                for (let i = 1; i <= 10; i++) {
+                    document.write(`<option value="${i}">${i}</option>`);
+                }
+            </script>
+        </select>
+    </div>
 
-<section id="contato">
-    <h2>Contato</h2>
-    <p>Informações de contato ou um formulário de contato podem ser inseridos aqui.</p>
-</section>
+    <h2>Sabores Com Recheio</h2>
+    <div class="item">
+        <label>
+            <input type="checkbox" name="saborComRecheio" value="Ninho com Nutella" onclick="toggleQuantity(this)">
+            Ninho com Nutella
+        </label>
+        <select class="quantity" onchange="updateMessage()">
+            <option value="0">Quantidade</option>
+            <script>
+                for (let i = 1; i <= 10; i++) {
+                    document.write(`<option value="${i}">${i}</option>`);
+                }
+            </script>
+        </select>
+    </div>
+    <div class="item">
+        <label>
+            <input type="checkbox" name="saborComRecheio" value="Ninho com Oreo" onclick="toggleQuantity(this)">
+            Ninho com Oreo
+        </label>
+        <select class="quantity" onchange="updateMessage()">
+            <option value="0">Quantidade</option>
+            <script>
+                for (let i = 1; i <= 10; i++) {
+                    document.write(`<option value="${i}">${i}</option>`);
+                }
+            </script>
+        </select>
+    </div>
+    <div class="item">
+        <label>
+            <input type="checkbox" name="saborComRecheio" value="Brigadeiro" onclick="toggleQuantity(this)">
+            Brigadeiro
+        </label>
+        <select class="quantity" onchange="updateMessage()">
+            <option value="0">Quantidade</option>
+            <script>
+                for (let i = 1; i <= 10; i++) {
+                    document.write(`<option value="${i}">${i}</option>`);
+                }
+            </script>
+        </select>
+    </div>
+    <div class="item">
+        <label>
+            <input type="checkbox" name="saborComRecheio" value="Beijinho" onclick="toggleQuantity(this)">
+            Beijinho
+        </label>
+        <select class="quantity" onchange="updateMessage()">
+            <option value="0">Quantidade</option>
+            <script>
+                for (let i = 1; i <= 10; i++) {
+                    document.write(`<option value="${i}">${i}</option>`);
+                }
+            </script>
+        </select>
+    </div>
 
-<footer>
-    <p>&copy; 2024 Seu Nome ou Sua Empresa. Todos os direitos reservados.</p>
-</footer>
+    <div class="nome-input">
+        <label for="nome">Seu Nome:</label>
+        <input type="text" id="nome" placeholder="Digite seu nome">
+    </div>
 
+    <button onclick="showModal()">Enviar Pedido</button>
+</div>
+
+<!-- Modal -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p id="message"></p>
+        <button onclick="sendWhatsApp()">OK</button>
+    </div>
+</div>
+
+<script>
+    function toggleQuantity(checkbox) {
+        const quantitySelect = checkbox.parentElement.nextElementSibling;
+        quantitySelect.style.display = checkbox.checked ? 'block' : 'none';
+    }
+
+    function updateMessage() {
+        let message = "Olá, gostaria de fazer um pedido:\n\n";
+        let total = 0; // Inicializa o total
+
+        const tamanhoCheckboxes = document.querySelectorAll('input[name="tamanho"]:checked');
+        tamanhoCheckboxes.forEach((checkbox) => {
+            const valueParts = checkbox.value.split(' - R$ ');
+            const quantitySelect = checkbox.parentElement.nextElementSibling;
+            const quantity = parseInt(quantitySelect.value);
+            if (quantity > 0) {
+                const itemTotal = quantity * parseFloat(valueParts[1]);
+                total += itemTotal; // Atualiza o total
+                message += `${checkbox.value} - Quantidade: ${quantity}\n`;
+            }
+        });
+
+        const saborSemRecheioCheckboxes = document.querySelectorAll('input[name="saborSemRecheio"]:checked');
+        saborSemRecheioCheckboxes.forEach((checkbox) => {
+            const quantitySelect = checkbox.parentElement.nextElementSibling;
+            const quantity = parseInt(quantitySelect.value);
+            if (quantity > 0) {
+                message += `${checkbox.value} - Quantidade: ${quantity}\n`;
+            }
+        });
+
+        const saborComRecheioCheckboxes = document.querySelectorAll('input[name="saborComRecheio"]:checked');
+        saborComRecheioCheckboxes.forEach((checkbox) => {
+            const quantitySelect = checkbox.parentElement.nextElementSibling;
+            const quantity = parseInt(quantitySelect.value);
+            if (quantity > 0) {
+                message += `${checkbox.value} - Quantidade: ${quantity}\n`;
+            }
+        });
+
+        // Adiciona o total à mensagem
+        message += `\nTotal: R$ ${total.toFixed(2)}`;
+        message += '\n Pix para pagamento: anabcavaggioni@icloud.com'
+
+        const nome = document.getElementById('nome').value;
+        if (nome) {
+            message = `Pedido de ${nome}:\n` + message;
+        }
+
+        document.getElementById('message').innerText = message;
+    }
+
+    function showModal() {
+        updateMessage(); // Atualiza a mensagem antes de abrir o modal
+        document.getElementById('modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('modal').style.display = 'none';
+    }
+
+    function sendWhatsApp() {
+        const message = encodeURIComponent(document.getElementById('message').innerText);
+        const phoneNumber = '5511992903885'; // Substitua pelo número desejado
+        const url = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`;
+        window.open(url, '_blank');
+    }
+</script>
 </body>
 </html>
